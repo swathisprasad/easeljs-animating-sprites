@@ -53,8 +53,8 @@ function start() {
 
 	animation.name = "royalPegaGuard";
 	animation.direction = 90;
-	animation.vX = 0.5;
-	animation.vY = 0;
+	animation.skewX = 0.5;
+	animation.skewY = 0;
 	animation.x = 14;
 	animation.y = 32;
 
@@ -65,8 +65,7 @@ function start() {
 	// we want to do some work before we update the canvas,
 	// otherwise we could use Ticker.addEventListener(stage);
 	createjs.Ticker.addEventListener(window);
-	createjs.Ticker.useRAF = true;
-	createjs.Ticker.setFPS(15);
+	createjs.Ticker.framerate = 15;
 	
 	// update the stage:
 	createjs.Ticker.on("tick", tick);
@@ -79,15 +78,8 @@ function handleImageError(e) {
 
 function tick(event) {
 	
-	// Moving the sprite based on the direction & the speed
-	if (animation.direction == 90) {
-		animation.x += animation.vX;
-		animation.y += animation.vY;
-	}
-	else {
-		animation.x -= animation.vX;
-		animation.y -= animation.vY;
-	}
+	animation.x += animation.skewX;
+	animation.y += animation.skewY;
 	
 	// update the stage:
 	stage.update(event);
